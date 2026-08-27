@@ -1,0 +1,10 @@
+#ifndef CRYPTO_H
+#define CRYPTO_H
+
+void xor_crypt(
+    char *data,
+    int length,
+    const char *key
+);
+
+#endif
