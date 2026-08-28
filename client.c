@@ -21,9 +21,6 @@ char key[MAX_KEY];
 
 volatile int running = 1;
 
-
-/* SEND ALL */
-
 int send_all(SOCKET socket, const char *data, int length)
 {
     int total = 0;
@@ -40,9 +37,6 @@ int send_all(SOCKET socket, const char *data, int length)
 
     return 1;
 }
-
-
-/* RECEIVE ALL */
 
 int recv_all(SOCKET socket, char *buffer, int length)
 {
@@ -61,9 +55,6 @@ int recv_all(SOCKET socket, char *buffer, int length)
     return 1;
 }
 
-
-/* SEND LENGTH-PREFIXED FRAME */
-
 int send_frame(SOCKET socket, const char *data, int length)
 {
     uint32_t network_length = htonl((uint32_t)length);
@@ -77,9 +68,6 @@ int send_frame(SOCKET socket, const char *data, int length)
 
     return send_all(socket, data, length);
 }
-
-
-/* RECEIVE LENGTH-PREFIXED FRAME */
 
 int recv_frame(SOCKET socket, char **data, int *length)
 {
@@ -116,9 +104,6 @@ int recv_frame(SOCKET socket, char **data, int *length)
     return 1;
 }
 
-
-/* ENCRYPTED SEND */
-
 int send_encrypted(const char *data, int length)
 {
     char *copy = (char *)malloc(length);
@@ -137,9 +122,6 @@ int send_encrypted(const char *data, int length)
     return result;
 }
 
-
-/* ENCRYPTED RECEIVE */
-
 int recv_encrypted(char **data, int *length)
 {
     if (!recv_frame(client_socket, data, length))
@@ -151,9 +133,6 @@ int recv_encrypted(char **data, int *length)
 
     return 1;
 }
-
-
-/* GET FILE NAME FROM PATH */
 
 void get_filename(const char *path, char *filename)
 {
@@ -170,9 +149,6 @@ void get_filename(const char *path, char *filename)
     else
         strcpy(filename, path);
 }
-
-
-/* RECEIVE FILE */
 
 void handle_received_file(char *data, int length)
 {
@@ -253,9 +229,6 @@ void handle_received_file(char *data, int length)
            output_filename);
 }
 
-
-/* RECEIVER THREAD */
-
 DWORD WINAPI receiver_thread(LPVOID parameter)
 {
     (void)parameter;
@@ -294,9 +267,6 @@ DWORD WINAPI receiver_thread(LPVOID parameter)
 
     return 0;
 }
-
-
-/* SEND FILE */
 
 void send_file(char *input)
 {
@@ -423,9 +393,6 @@ void send_file(char *input)
 
     free(packet);
 }
-
-
-/* MAIN */
 
 int main(int argc, char *argv[])
 {
@@ -568,10 +535,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    /*
-       CREATE RECEIVER THREAD
-    */
-
     HANDLE receiver =
         CreateThread(
             NULL,
@@ -600,8 +563,6 @@ int main(int argc, char *argv[])
     printf("SENDFILE TO <user> <filename>\n");
     printf("LIST\n");
     printf("QUIT\n\n");
-
-    /* COMMAND LOOP */
 
     while (running)
     {
