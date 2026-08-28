@@ -1,18 +1,14 @@
 #include "crypto.h"
 #include <string.h>
-
-void xor_crypt(
-    char *data,
-    int length,
-    const char *key)
+void xor_crypt(char *data, int length, const char *key)
 {
-    int key_length = (int)strlen(key);
-
-    if (key_length == 0)
+    int keyLen = (int)strlen(key);
+    if (keyLen <= 0)
         return;
-
-    for (int i = 0; i < length; i++)
+    for (int index = 0; index < length; index++)
     {
-        data[i] ^= key[i % key_length];
+        int keyIndex = index % keyLen;
+        data[index] = data[index] ^ key[keyIndex];
     }
 }
+
