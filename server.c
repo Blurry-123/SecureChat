@@ -892,10 +892,11 @@ DWORD WINAPI client_thread(
             &clients_lock
         );
 
-        send_frame(
+        send_encrypted(
             socket,
-            "ERROR username already exists",
-            29
+            key,
+             "ERROR username already exists",
+             (int)strlen("ERROR username already exists")
         );
 
         remove_client(index);
