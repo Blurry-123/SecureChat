@@ -416,6 +416,7 @@ This is a deliberate simplification required for the assignment.
 A true end-to-end encrypted system would require the communicating
 clients to establish a shared secret/key directly, so that the server
 would forward ciphertext without being able to decrypt the message.
+File Transfer Size Cap:1 MB
 
 ---
 
