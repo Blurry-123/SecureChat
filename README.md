@@ -1,270 +1,600 @@
 # Team SecureChat — Secure Chat Application
 
 A multi-client secure chat application implemented in C using TCP sockets.
-The application supports user registration, encrypted messaging, text-file
-transfer, multiple simultaneous clients, error handling, and encrypted
-client-server communication.
 
----
+The application supports:
 
-## Group Members
+- User registration
+- Multiple simultaneous clients
+- Encrypted client-server communication
+- Message routing between users
+- Text file transfer
+- File validation
+- File size limitation
+- Error handling
+- Client disconnection
+- Online user listing
+- Testing between multiple computers on the same Wi-Fi network
 
-- **Member 1 — Shreya Acharya (24156096)**
+The project was developed as a three-member team using GitHub for collaboration and integration.
+
+
+# Group Members
+
+- Member 1 — Shreya Acharya (24156096)
   - Server implementation
   - TCP socket programming
   - Client-server communication
-  - Concurrency and multiple-client handling
-  - Server-side routing
+  - Multiple-client handling
+  - Server-side message routing
   - Integration and final testing
 
-- **Member 2 — Saswati Tripathy (24156092)**
+- Member 2 — Saswati Tripathy (24156092)
   - Client implementation
   - Encryption and decryption
   - User registration
   - Chat commands
   - Client-server communication testing
 
-- **Member 3 — Alipriya Mandal (24156040)**
+- Member 3 — Alipriya Mandal (24156040)
   - Text file transfer
-  - File validation and size limitation
-  - Error handling and testing
+  - File validation
+  - File size limitation
+  - Error handling
   - Protocol testing
   - README and documentation
 
----
 
-# How to Build
+# Project Collaboration
 
-## 1. Requirements
+The project was maintained using a GitHub repository so that all three team members could work on the same SecureChat project.
 
-The following software is required:
+The repository contains the common project files:
+
+    server.c
+    client.c
+    crypto.c
+    crypto.h
+    README.md
+
+Each team member cloned the same repository onto their own laptop.
+
+The files were kept in the same project structure so that changes made by one member could be integrated by the other members using Git.
+
+The repository was also used to correct the original file extensions.
+
+Initially, some source files were stored with `.txt` extensions:
+
+    client.c.txt
+    crypto.c.txt
+    crypto.h.txt
+
+These were renamed to:
+
+    client.c
+    crypto.c
+    crypto.h
+
+The corrected files were committed and pushed to the repository so that all team members could use the proper C source files.
+
+
+# Development Environment
+
+The project was developed and tested on Windows.
+
+Required software:
 
 - Windows 10/11
 - Visual Studio Code
-- MinGW GCC compiler
+- MinGW GCC
+- Git
 - TCP/IP networking
-- Tailscale (only when testing between computers on different networks)
 
-The project does not require any external cryptography library.
+The project uses the Windows Winsock2 library for socket communication.
+
+No external cryptography library is required.
 
 The encryption algorithm is implemented manually in C.
 
-The project uses the Windows **Winsock2** library for TCP socket
-communication.
 
----
+# Project Folder
 
-## 2. Project Files
-
-The project contains the following important files:
-
-    server.c
-    client.c
-    crypto.c
-    crypto.h
-    README.md
-
-After compilation, the following executable files are generated:
-
-    server.exe
-    client.exe
-
----
-
-## 3. Open the Project
-
-Open Visual Studio Code and open the project folder.
+Each team member keeps a local copy of the project on their own laptop.
 
 Example:
 
-    C:\Users\KIIT\Downloads\securechat
+    C:\Users\KIIT\Desktop\SecureChat
 
-Open a terminal in VS Code:
+The folder contains:
+
+    SecureChat
+    |
+    |-- server.c
+    |-- client.c
+    |-- crypto.c
+    |-- crypto.h
+    |-- README.md
+    |
+    |-- server.exe
+    |-- client.exe
+    
+# Opening the Project
+
+The project can be opened using Visual Studio Code.
+
+Open the SecureChat folder in VS Code.
+
+Then open:
 
     Terminal → New Terminal
 
-The VS Code terminal can be PowerShell, Command Prompt, or Git Bash.
+The VS Code terminal can be:
 
-A separate Windows PowerShell window is NOT required.
+- PowerShell
+- Command Prompt
+- Git Bash
 
----
+A separate Windows PowerShell window is not required.
 
-## 4. Check GCC Installation
+All compilation and execution commands can be performed directly inside the VS Code terminal.
 
-Before compiling, verify that MinGW GCC is installed.
 
-Run:
+# GitHub Setup
+
+The project was shared through GitHub.
+
+Each team member first clones the repository.
+
+Example:
+
+    git clone https://github.com/Blurry-123/SecureChat.git
+
+Then enter the project folder:
+
+    cd SecureChat
+
+After making changes, the changes can be checked using:
+
+    git status
+
+Changes can be added using:
+
+    git add .
+
+A commit can then be created:
+
+    git commit -m "Description of changes"
+
+Finally, the changes can be uploaded:
+
+    git push
+
+When another member has already pushed changes, the latest version can be obtained using:
+
+    git pull
+
+This allows all three members to keep their local SecureChat folders synchronized.
+
+
+# Important Git Collaboration Rule
+
+The same project folder should be used after cloning the repository.
+
+A second unrelated SecureChat folder should not be created for the same project.
+
+Each team member has their own local copy of the repository on their own laptop.
+
+For example:
+
+    Laptop 1
+        C:\...\SecureChat
+
+    Laptop 2
+        C:\...\SecureChat
+
+    Laptop 3
+        C:\...\SecureChat
+
+These are separate local folders, but they all contain the same project obtained from the GitHub repository.
+
+
+# Checking GCC Installation
+
+Open a VS Code terminal and run:
 
     gcc --version
 
-Example output:
+If GCC is installed correctly, its version information will be displayed.
 
-    gcc.exe (MinGW.org GCC-6.3.0-1) 6.3.0
+For example:
 
-The project was developed and tested using MinGW GCC.
+    gcc.exe (MinGW.org GCC-6.3.0-1)
 
----
 
-## 5. Compile the Server
+# Compiling the Server
 
-From inside the project folder, run:
+The server and encryption source files are compiled separately.
+
+For the current project, the server is compiled using:
 
     gcc server.c -o server.exe -lws2_32
 
-Explanation:
+If compilation succeeds, no error message should appear.
 
-- `gcc` starts the GCC compiler.
-- `server.c` is the server source file.
-- `-o server.exe` creates the server executable.
-- `-lws2_32` links the Windows Winsock2 library required for TCP socket
-  programming.
+The following executable will be created:
 
-If compilation is successful, no error message will be displayed and
-`server.exe` will be created.
+    server.exe
 
----
 
-## 6. Compile the Client
+# Compiling the Client
 
-Compile the client and encryption implementation using:
+The client uses both `client.c` and `crypto.c`.
+
+Compile it using:
 
     gcc client.c crypto.c -o client.exe -lws2_32
 
-Explanation:
+If compilation succeeds, the following executable will be created:
 
-- `client.c` contains the client implementation.
-- `crypto.c` contains the encryption and decryption functions.
-- `crypto.h` contains the declarations for the cryptographic functions.
-- `-lws2_32` links the Windows Winsock2 library.
-
-After successful compilation, `client.exe` will be created.
-
----
-
-## 7. Check the Executables
-
-The project directory should now contain:
-
-    server.exe
     client.exe
 
-along with:
 
-    server.c
-    client.c
-    crypto.c
-    crypto.h
-    README.md
+# Important Compilation Note
 
----
+The encryption function `xor_crypt()` is implemented in `crypto.c`.
 
-# How to Run
+Therefore, `server.c` should not contain another definition of the same function when compiling the server together with `crypto.c`.
 
-## 1. Start the Server
+If the same function is defined in both files and both are compiled together, GCC produces an error similar to:
 
-The computer acting as the server runs:
+    multiple definition of `xor_crypt`
+
+The final project should contain only one implementation of the encryption function.
+
+
+# Starting the Server
+
+One computer acts as the server computer.
+
+Open the SecureChat folder in VS Code and open a terminal.
+
+Compile:
+
+    gcc server.c -o server.exe -lws2_32
+
+Then start the server on port 8080:
 
     .\server.exe 8080
 
 The server displays:
 
     ==============================
-          Secure Chat Server
+           Secure Chat Server
     ==============================
     Server running on port 8080
     Waiting for clients...
 
-The server must remain running while clients are connecting and
-communicating.
 
-Do not close the server terminal.
+The server terminal must remain open.
 
----
+Do not close the server terminal while clients are connected.
 
-## 2. Find the Server IP Address
 
-If the clients are on the same Wi-Fi/network as the server, the server's
-local IPv4 address can be used.
+# Finding the Server IP Address
 
-Run:
+Because the three computers are connected to the same Wi-Fi network, the server computer's local IPv4 address can be used.
+
+On the server computer, open a terminal and run:
 
     ipconfig
 
-Find:
+Find the network adapter currently connected to the Wi-Fi.
+
+Look for:
 
     IPv4 Address
 
 For example:
 
-    192.168.29.228
+    IPv4 Address. . . . . . . . . . . : 192.168.1.105
 
-The client can then connect using:
+The actual IP address will be different depending on the network.
 
-    .\client.exe 192.168.29.228 8080
+The clients must use the server computer's IPv4 address.
 
----
 
-## 3. Testing Between Different Networks
+# Same Wi-Fi Integration
 
-If the server and clients are connected to different Wi-Fi networks,
-the local IPv4 address generally cannot be used directly.
+The final demonstration uses three different laptops connected to the same Wi-Fi network.
 
-Tailscale can be used to create a private network between the computers.
+The architecture is:
 
-After installing and signing into the same Tailscale network, obtain the
-server's Tailscale IP address.
+    Laptop 1
+    Server
+    IP: 192.168.x.x
+         |
+         |
+         | Wi-Fi / TCP
+         |
+    +----+---------------------+
+    |                          |
+    v                          v
+    Laptop 2                  Laptop 3
+    Client                    Client
+    Monk                      Alice
 
-On Windows, if the `tailscale` command is not available directly, use:
 
-    & "C:\Program Files\Tailscale\tailscale.exe" ip
+The server runs only on one laptop.
 
-For example, the server may have a Tailscale IPv4 address such as:
+The other two laptops run the client.
 
-    100.104.194.122
+All three computers must be connected to the same Wi-Fi network.
 
-The client then connects using:
 
-    .\client.exe 100.104.194.122 8080
+# Three-Laptop Setup
 
-Both computers must be connected to the same Tailscale network.
+## Laptop 1 — Server
 
----
+Laptop 1 runs:
+
+    server.exe
+
+Start it using:
+
+    .\server.exe 8080
+
+Find the IPv4 address using:
+
+    ipconfig
+
+For example:
+
+    192.168.1.105
+
+
+## Laptop 2 — Client 1
+
+Laptop 2 compiles the client:
+
+    gcc client.c crypto.c -o client.exe -lws2_32
+
+Then connects to Laptop 1 using the server's IP address:
+
+    .\client.exe 192.168.1.105 8080
+
+Replace `192.168.1.105` with the actual server IP.
+
+
+## Laptop 3 — Client 2
+
+Laptop 3 also compiles the client:
+
+    gcc client.c crypto.c -o client.exe -lws2_32
+
+Then connects using:
+
+    .\client.exe 192.168.1.105 8080
+
+Again, replace the example IP address with the actual server IP.
+
+
+# Three-User Demonstration
+
+For example:
+
+    Laptop 1:
+        Server
+
+    Laptop 2:
+        Username: sumo
+        Key: sumo123
+
+    Laptop 3:
+        Username: monk
+        Key: monk123
+
+Both clients connect to the same server.
+
+The server maintains both users simultaneously.
+
+A third client can also connect from another laptop:
+
+    Username: alice
+    Key: alice123
+
 
 # Client Registration
 
-After the client successfully connects to the server, the client
-registers with a unique username and encryption key.
+When a client starts, it asks for:
+
+    Username:
+    Key:
 
 For example:
 
     Username: sumo
-    Key: sumokey123
+    Key: sumo123
 
-Another client can register as:
+The server registers the user and responds:
+
+    server$ OK REGISTERED sumo
+
+Another client can register:
 
     Username: monk
-    Key: monkkey456
+    Key: monk123
 
-The server maintains a table of connected users and their corresponding
-encryption keys.
+The response is:
 
-Usernames must be unique.
+    server$ OK REGISTERED monk
 
-If a duplicate username is registered, the server rejects the request.
 
-Example:
+# Unique Usernames
+
+Every connected client must have a unique username.
+
+For example:
+
+    sumo
+    monk
+    alice
+
+are valid simultaneously.
+
+If another client tries to register as `sumo` while `sumo` is already connected, the server returns:
 
     ERROR username already exists
 
----
+The server continues running after rejecting the duplicate username.
 
-# Chat Communication
 
-The client can send a message to another online user.
+# Chat Commands
 
-Example:
+The available commands are:
 
-    sumo$ - SEND TO monk: Hello, There!
+    SEND TO <user> <message>
+
+    SENDFILE TO <user> <filename>
+
+    LIST
+
+    QUIT
+
+
+# Sending Messages
+
+Suppose the connected users are:
+
+    sumo
+    monk
+    alice
+
+Sumo can send a message to Monk using:
+
+    SEND TO monk Hello Monk!
+
+The server receives the message, processes the destination username, and routes it to Monk.
+
+Monk receives:
+
+    FROM sumo: Hello Monk!
+
+
+Monk can then reply:
+
+    SEND TO sumo Hello Sumo!
+
+Sumo receives:
+
+    FROM monk: Hello Sumo!
+
+
+# Important Command Format
+
+The destination username must be entered immediately after:
+
+    SEND TO
+
+Correct:
+
+    SEND TO monk Hello Sumo!
+
+Incorrect:
+
+    SEND TO Hello Sumo!
+
+The second command attempts to send a message to a user named `Hello`, which normally does not exist.
+
+This results in:
+
+    ERROR user is not online
+
+
+# Simultaneous Communication
+
+The server supports multiple connected clients.
+
+For example:
+
+    Sumo  → Monk
+    Monk  → Sumo
+    Alice → Monk
+    Monk  → Alice
+    Sumo  → Alice
+
+All three users can remain connected simultaneously.
+
+The server creates a separate client-handling thread for each connected client.
+
+Therefore, one connected user does not have to disconnect before another user can communicate.
+
+
+# Online User List
+
+The command:
+
+    LIST
+
+shows the users currently connected to the server.
+
+For example:
+
+    ONLINE sumo, monk, alice
+
+
+# Encryption
+
+The project uses a Repeating-Key XOR cipher.
+
+The encryption operation is:
+
+    Ciphertext = Plaintext XOR Key
+
+The same operation is used to decrypt:
+
+    Plaintext = Ciphertext XOR Key
+
+
+For example, if a user uses:
+
+    Key: sumo123
+
+the key is repeatedly applied to the message bytes.
+
+The encryption implementation is contained in:
+
+    crypto.c
+
+The function declaration is provided through:
+
+    crypto.h
+
+
+# Why XOR Was Used
+
+Repeating-Key XOR was selected because:
+
+1. It is simple to understand.
+2. It can be implemented manually in C.
+3. It does not require an external cryptography library.
+4. Encryption and decryption use the same operation.
+5. It demonstrates the concept of symmetric-key encryption.
+
+
+# Important Security Limitation
+
+Repeating-Key XOR is not considered secure modern cryptography.
+
+It is used in this project for educational demonstration.
+
+Because the key is repeated, an attacker with enough ciphertext may be able to discover patterns.
+
+A production secure chat application should use a modern authenticated encryption algorithm such as AES-GCM or ChaCha20-Poly1305 and a proper key-exchange mechanism.
+
+
+# Hop-by-Hop Encryption
+
+The project uses hop-by-hop encryption.
 
 The communication process is:
 
@@ -272,235 +602,48 @@ The communication process is:
          |
          | Encrypted using Sumo's key
          v
-    Server
+       Server
          |
          | Decrypt using Sumo's key
          |
-         | Look up Monk's key
+         | Route message
          |
-         | Re-encrypt using Monk's key
+         | Encrypt using Monk's key
          v
     Monk Client
-         |
-         | Decrypt using Monk's key
-         v
-    Hello, There!
 
-The receiver sees:
 
-    monk$ - FROM sumo: Hello, There!
+Therefore, the server temporarily has access to the plaintext message.
 
-If the receiver is offline:
+This is different from true end-to-end encryption.
 
-    server$ - ERROR monk is not online
+The design is intentionally simplified for demonstrating socket programming and symmetric-key encryption.
 
----
 
-# Cipher Choice
+# File Transfer
 
-## Repeating-Key XOR Cipher
+The application supports text-file transfer.
 
-We chose the **Repeating-Key XOR cipher** for this project.
-
-The XOR operation is performed between each character of the message and
-a character of the repeating encryption key.
-
-For example, if the message is longer than the key, the key is reused
-from the beginning.
-
-The same operation can be used for both encryption and decryption because:
-
-    A XOR B XOR B = A
-
-Therefore:
-
-    Ciphertext = Plaintext XOR Key
-
-and:
-
-    Plaintext = Ciphertext XOR Key
-
----
-
-## Why We Chose XOR
-
-We selected the Repeating-Key XOR cipher because:
-
-1. It is simple to understand and implement manually.
-2. It does not require external cryptographic libraries.
-3. Encryption and decryption use the same operation.
-4. It is efficient for text communication.
-5. It can be implemented easily in C.
-6. It can operate on arbitrary bytes, allowing encrypted data to be
-   transferred without depending on printable characters.
-
-The simplicity of XOR also makes it suitable for demonstrating the
-basic concept of symmetric-key encryption.
-
----
-
-## Known Weakness of Repeating-Key XOR
-
-Repeating-Key XOR is **not considered secure modern cryptography**.
-
-The main weakness is that the encryption key is repeatedly reused.
-If an attacker obtains enough ciphertext, patterns in the plaintext may
-become visible.
-
-It is therefore suitable for demonstrating encryption concepts in this
-assignment, but it should not be used to protect sensitive information
-in a real-world application.
-
-A production secure chat application would use a modern authenticated
-encryption algorithm such as AES-GCM or ChaCha20-Poly1305 together with
-proper key exchange and authentication.
-
----
-
-# Encryption / Decryption
-
-All important communication between the clients and server is encrypted
-before being sent through the socket.
-
-This includes:
-
-- Registration information
-- Chat messages
-- Text-file contents
-- Server responses where applicable
-
-The encryption and decryption functions are implemented in:
-
-    crypto.c
-
-Their declarations are provided in:
-
-    crypto.h
-
-The same key used for encryption is required for decryption.
-
----
-
-# Design Notes
-
-## 1. Hop-by-Hop Encryption
-
-The application uses **hop-by-hop encryption**, not true end-to-end
-encryption.
-
-The communication follows:
-
-    Client → Server → Client
-
-For example:
-
-    Sumo
-      |
-      | encrypted using Sumo's key
-      v
-    Server
-      |
-      | plaintext temporarily exists in server memory
-      |
-      | encrypted using Monk's key
-      v
-    Monk
-
-The server decrypts the message using the sender's key and then
-re-encrypts it using the receiver's key.
-
-Therefore, the server temporarily has access to the plaintext.
-
-This is a deliberate simplification required for the assignment.
-
-A true end-to-end encrypted system would require the communicating
-clients to establish a shared secret/key directly, so that the server
-would forward ciphertext without being able to decrypt the message.
-
----
-
-# 2. Server Architecture
-
-The server uses TCP sockets.
-
-The general server process is:
-
-    1. Create socket
-    2. Bind socket to port
-    3. Listen for connections
-    4. Accept clients
-    5. Register clients
-    6. Receive commands
-    7. Decrypt incoming data
-    8. Process the command
-    9. Route the message/file
-    10. Encrypt the response
-    11. Send the response
-    12. Continue serving clients
-
-The server maintains information about connected users so that messages
-can be routed to the correct recipient.
-
----
-
-# 3. Concurrency
-
-The server is designed to support multiple clients simultaneously.
-
-For example:
-
-    Sumo
-      \
-       \
-       Server ---- Monk
-       /
-      /
-    Alice
-
-Multiple users can remain connected and communicate without one client
-blocking all other clients.
-
-The server uses a concurrent client-handling approach so that each
-connected client can be processed independently.
-
-This allows the following situation:
-
-    Sumo  → Monk
-    Alice → Sumo
-    Monk  → Alice
-
-to occur while all three clients remain connected.
-
----
-
-# 4. Text File Transfer
-
-The application supports sending `.txt` files between users.
+Only `.txt` files are accepted.
 
 Example:
 
-    SENDFILE TO monk: notes.txt
+    SENDFILE TO monk test_files\notes.txt
 
-The client:
 
-1. Checks whether the file exists.
-2. Checks that it is a `.txt` file.
-3. Reads the file into memory.
-4. Encrypts its contents using the sender's key.
-5. Sends the request to the server.
+The client checks:
 
-The server:
+1. Whether the file exists.
+2. Whether the file is a `.txt` file.
+3. Whether the file is within the allowed size.
+4. Whether the file can be read.
 
-1. Decrypts the content using the sender's key.
-2. Checks that the receiver is online.
-3. Encrypts the content using the receiver's key.
-4. Sends the encrypted file to the receiver.
+If all checks succeed, the file is encrypted and sent to the server.
 
-The receiver:
 
-1. Decrypts the content.
-2. Creates a local file.
-3. Saves the received content using a `received_` prefix.
+# Receiving a File
+
+The receiving client decrypts the transferred file and saves it with a `received_` prefix.
 
 For example:
 
@@ -510,107 +653,202 @@ is saved as:
 
     received_notes.txt
 
-This prevents the original local file from being overwritten.
 
----
+This prevents the original file from being overwritten.
 
-# 5. File Size Limitation
 
-A maximum file size is used to prevent extremely large files from
-being transferred.
+# Relative File Path Test
 
-The project uses a reasonable size limit so that file transfer can be
-performed in memory without requiring chunked or streaming transfer.
-
-Files exceeding the configured limit are rejected with an error.
+A relative path can be used when the file exists relative to the current working directory.
 
 Example:
 
-    ERROR file too large
+    SENDFILE TO monk test_files\relative_test.txt
 
-Only text files are supported.
+If the file is found and valid, it is transferred.
+
+The received file can then be compared with the original.
+
+
+# Full File Path Test
+
+A full Windows path can also be used.
 
 Example:
 
-    SENDFILE TO monk: report.pdf
+    SENDFILE TO monk C:\Users\KIIT\Documents\notes.txt
 
-results in:
+The client checks the specified location and transfers the file if it exists and satisfies the requirements.
 
-    ERROR only .txt files are supported
 
----
+# File Comparison Test
 
-# 6. File Framing
+After receiving a file, the original and received files can be compared.
 
-Text files can contain newline characters.
+PowerShell uses `fc` as an alias for `Format-Custom`, so the following command should not be used directly in PowerShell:
 
-Therefore, a simple line-based delimiter cannot reliably determine where
-the file content ends.
+    fc /b test_files\notes.txt received_notes.txt
 
-The protocol uses length information for file data so that the receiver
-knows exactly how many bytes belong to the file payload.
+Instead, use the Windows executable explicitly:
 
-Conceptually:
+    fc.exe /b test_files\notes.txt received_notes.txt
 
-    SENDFILE TO monk notes.txt <length>
-    <encrypted file data>
+If the files are identical, the comparison should indicate that no differences were found.
 
-This allows files containing multiple lines to be transferred correctly.
+This was used to verify that transferred files were byte-identical to the originals.
 
----
 
-# 7. Error Handling
+# File Validation Tests
 
-The server must continue running even when clients send invalid input.
+The following file-transfer tests were successfully performed.
 
-Examples include:
 
-### Unknown command
+## Test — Missing File
 
-    client$ - BLAHBLAH
+Command:
 
-Response:
+    SENDFILE TO monk missing.txt
 
-    server$ - ERROR unknown command
-
-### Invalid command format
-
-    client$ - SEND monk Hello
-
-Response:
-
-    server$ - ERROR invalid command format
-
-### Offline user
-
-    SENDFILE TO ghost: notes.txt
-
-Response:
-
-    ERROR ghost is not online
-
-### Missing file
-
-    SENDFILE TO monk: missing.txt
-
-Response:
+Expected result:
 
     ERROR file not found: missing.txt
 
-### Unsupported file type
 
-    SENDFILE TO monk: report.pdf
+## Test — Unsupported File Type
 
-Response:
+Command:
+
+    SENDFILE TO monk test_files\report.pdf
+
+Expected result:
 
     ERROR only .txt files are supported
 
-The server should not terminate because of malformed input from one
-client.
 
----
+## Test — Oversized File
 
-# 8. Client Disconnection
+Command:
+
+    SENDFILE TO monk test_files\large.txt
+
+Expected result:
+
+    ERROR file too large
+
+
+These tests confirm that invalid file requests are rejected without terminating the server.
+
+
+# Message Testing
+
+Basic message communication was tested between users.
+
+Example:
+
+    Sumo → Monk
+
+    SEND TO monk Hello Monk!
+
+
+Monk receives:
+
+    FROM sumo: Hello Monk!
+
+
+The reverse direction was also tested:
+
+    Monk → Sumo
+
+    SEND TO sumo Hello Sumo!
+
+
+Sumo receives:
+
+    FROM monk: Hello Sumo!
+
+
+Both directions were successfully tested.
+
+
+# Multiple Client Testing
+
+Three clients can be connected at the same time.
+
+Example:
+
+    Sumo
+    Monk
+    Alice
+
+
+The following communication can occur:
+
+    Sumo  → Monk
+    Monk  → Sumo
+    Alice → Monk
+    Monk  → Alice
+    Sumo  → Alice
+
+
+The server continues running while all clients communicate.
+
+
+# Error Handling
+
+The application handles invalid commands without terminating the server.
+
+
+## Unknown Command
+
+Example:
+
+    BLAHBLAH
+
+Expected response:
+
+    ERROR unknown command
+
+
+## Offline User
+
+Example:
+
+    SEND TO ghost Hello
+
+Expected response:
+
+    ERROR user is not online
+
+
+## Duplicate Username
+
+Expected response:
+
+    ERROR username already exists
+
+
+## Unsupported File
+
+Expected response:
+
+    ERROR only .txt files are supported
+
+
+## Oversized File
+
+Expected response:
+
+    ERROR file too large
+
+
+## Missing File
+
+Expected response:
+
+    ERROR file not found
+
+
+# Client Disconnection
 
 A client can disconnect using:
 
@@ -620,396 +858,269 @@ The server responds:
 
     GOODBYE <username>
 
-The server then:
+The server then removes the client from its active-client table.
 
-1. Closes the client's socket.
-2. Removes the user from the connected-client table.
-3. Releases the resources associated with that client.
-4. Continues serving the remaining clients.
+Other connected users can continue communicating.
 
-An abrupt disconnection, such as pressing `Ctrl+C`, should also be
-handled without terminating the server.
 
----
+# Abrupt Disconnection
 
-# 9. Online Users
-
-The client may use:
-
-    LIST
-
-to request the currently connected users.
-
-The server responds with a list of online users.
-
-Example:
-
-    server$ - ONLINE monk, alice, bob
-
-This allows clients to determine which users are currently connected.
-
----
-
-# Testing
-
-The following tests are performed to verify the application.
-
-## Test 1 — Multiple Clients
-
-At least three clients are connected:
-
-    Sumo
-    Monk
-    Alice
-
-They communicate simultaneously through the server.
-
-Messages are delivered only to the intended recipient.
-
----
-
-## Test 2 — Duplicate Username
-
-A username that is already registered is used again.
-
-Expected result:
-
-    ERROR username already exists
-
-The server continues running.
-
----
-
-## Test 3 — Offline User
-
-A message is sent to a user who is not connected.
-
-Example:
-
-    SEND TO ghost: Hello
-
-Expected result:
-
-    ERROR ghost is not online
-
----
-
-## Test 4 — Abrupt Disconnection
-
-A client is terminated using:
+A client can also be terminated using:
 
     Ctrl+C
 
-The server detects the disconnection and removes the client.
+The server detects the lost connection and removes the client.
 
-Other connected clients continue to work.
+Other connected clients remain connected and can continue using the chat application.
 
----
 
-## Test 5 — Malformed Input
+# Network Requirements for Three-Laptop Demonstration
 
-Invalid commands and garbage input are sent to the server.
+For the final demonstration using three different laptops:
 
-Expected behavior:
+1. All three laptops should be connected to the same Wi-Fi network.
+2. One laptop runs the server.
+3. The other two laptops run clients.
+4. The server laptop's IPv4 address must be obtained using `ipconfig`.
+5. Both clients must connect to that IP address.
+6. Port `8080` must be available for the server.
+7. The server program must remain running.
 
-    ERROR invalid command format
+The connection looks like:
 
-or:
+                    Wi-Fi Network
+                         |
+          +--------------+--------------+
+          |              |              |
+          v              v              v
+       Laptop 1       Laptop 2       Laptop 3
+       SERVER           SUMO           MONK
+       :8080             |              |
+          |               \            /
+          |                \          /
+          +-----------------SERVER---+
+                    TCP connections
 
-    ERROR unknown command
 
-The server does not crash.
+# Windows Firewall
 
----
+If clients cannot connect to the server even though all computers are on the same Wi-Fi network, Windows Firewall may be blocking the server.
 
-## Test 6 — Encryption/Decryption Round Trip
+When Windows asks whether to allow the application through the firewall, allow access on the appropriate private network.
 
-The encryption function is tested using:
+The server must be reachable from the client laptops over the local network.
 
-- Empty input
-- Short text
-- Long text
-- Spaces
-- Numbers
-- Special characters
-- Delimiters
-- Newline characters
 
-The expected result is:
+# Complete Three-Laptop Execution
 
-    Original
-       ↓
-    Encrypt
-       ↓
-    Ciphertext
-       ↓
-    Decrypt
-       ↓
-    Original
+## Laptop 1 — Server
 
-Therefore:
+Open VS Code.
 
-    decrypt(encrypt(message, key), key) = message
+Open the SecureChat folder.
 
----
-
-## Test 7 — Different Client Keys
-
-Two clients use different encryption keys.
-
-For example:
-
-    Sumo → sumokey123
-    Monk → monkkey456
-
-The same plaintext message produces different ciphertext on the two
-client-server communication legs because different keys are used.
-
-The server decrypts the sender's ciphertext and re-encrypts the
-plaintext using the receiver's key.
-
----
-
-## Test 8 — File Transfer
-
-A small `.txt` file is sent from one client to another.
-
-Example:
-
-    notes.txt
-
-The receiver obtains:
-
-    received_notes.txt
-
-The decrypted file contents are compared with the original file.
-
-The contents should be byte-identical.
-
----
-
-## Test 9 — Relative File Path
-
-A file in the current working directory is sent using its filename.
-
-Example:
-
-    SENDFILE TO monk: notes.txt
-
-The transfer should succeed if the file exists.
-
----
-
-## Test 10 — Full File Path
-
-A file located elsewhere is sent using its full path.
-
-Example:
-
-    SENDFILE TO monk: C:\Users\KIIT\Documents\notes.txt
-
-The client reads the file and sends it if it satisfies the file
-requirements.
-
----
-
-## Test 11 — Nonexistent File
-
-Example:
-
-    SENDFILE TO monk: missing.txt
-
-Expected:
-
-    ERROR file not found
-
----
-
-## Test 12 — Oversized File
-
-A file larger than the configured size limit is selected.
-
-Expected:
-
-    ERROR file too large
-
-The server remains operational.
-
----
-
-# Example Complete Execution
-
-## Server Computer
-
-Open VS Code terminal:
-
-    cd C:\Users\KIIT\Downloads\securechat
+Open a terminal.
 
 Compile:
 
     gcc server.c -o server.exe -lws2_32
 
-Start server:
+Run:
 
     .\server.exe 8080
 
-Output:
+Find the IP:
 
-    ==============================
-          Secure Chat Server
-    ==============================
-    Server running on port 8080
-    Waiting for clients...
+    ipconfig
 
----
+Example:
 
-## Client 1 — Sumo
+    IPv4 Address: 192.168.1.105
 
-On the first client computer:
+Keep this terminal open.
+
+
+## Laptop 2 — Sumo
+
+Open the SecureChat project.
+
+Compile:
 
     gcc client.c crypto.c -o client.exe -lws2_32
 
 Connect:
 
-    .\client.exe 100.104.194.122 8080
+    .\client.exe 192.168.1.105 8080
 
 Register:
 
     Username: sumo
-    Key: sumokey123
+    Key: sumo123
 
----
 
-## Client 2 — Monk
+## Laptop 3 — Monk
 
-On another computer:
+Open the SecureChat project.
+
+Compile:
 
     gcc client.c crypto.c -o client.exe -lws2_32
 
 Connect:
 
-    .\client.exe 100.104.194.122 8080
+    .\client.exe 192.168.1.105 8080
 
 Register:
 
     Username: monk
-    Key: monkkey456
+    Key: monk123
 
----
 
-## Client 3 — Alice
+# Final Demonstration
 
-On the third computer:
+Once all three computers are connected:
 
-    gcc client.c crypto.c -o client.exe -lws2_32
+    Sumo
+    Monk
+    Alice
 
-Connect:
+Use:
 
-    .\client.exe 100.104.194.122 8080
+    LIST
 
-Register:
+to confirm that all users are online.
 
-    Username: alice
-    Key: alicekey789
+Then demonstrate communication.
 
-All three clients can now communicate through the server.
+For example, from Sumo:
 
-Example:
+    SEND TO monk Hello Monk!
 
-    sumo$ - SEND TO monk: Hello, There!
 
-The server receives the encrypted message, decrypts it using Sumo's key,
-looks up Monk's key, encrypts the message again, and forwards it.
+From Monk:
 
-Monk receives:
+    SEND TO sumo Hello Sumo!
 
-    monk$ - FROM sumo: Hello, There!
 
----
+From Alice:
 
-# How the Complete System Works
+    SEND TO monk Hello Monk!
 
-The complete communication architecture is:
 
-                 +----------------+
-                 |     Sumo       |
-                 |    Client      |
-                 +-------+--------+
-                         |
-                  Encrypted with
-                   Sumo's key
-                         |
-                         v
-                +--------+--------+
-                |      SERVER     |
-                |                 |
-                | Decrypt message |
-                |      ↓          |
-                | Route message   |
-                |      ↓          |
-                | Encrypt message |
-                +--------+--------+
-                         |
-                  Encrypted with
-                   Monk's key
-                         |
-                         v
-                 +-------+--------+
-                 |      Monk      |
-                 |     Client     |
-                 +----------------+
+Then demonstrate communication in the opposite directions.
 
-The same process is used for file transfers, except that the file
-contents are encrypted before transmission and decrypted after receipt.
+This proves that the server can maintain multiple TCP connections and route messages between different users.
 
----
 
-# Design Limitations
+# Testing Summary
 
-The following limitations apply to the project:
+The following functionality was tested:
 
-1. The application uses Repeating-Key XOR, which is not suitable for
-   real-world secure communication.
+    ✓ Server compilation
+    ✓ Client compilation
+    ✓ Client registration
+    ✓ Unique username validation
+    ✓ Two-way messaging
+    ✓ Multiple connected clients
+    ✓ Online user listing
+    ✓ Unknown command handling
+    ✓ Offline user handling
+    ✓ Duplicate username handling
+    ✓ Client disconnection
+    ✓ Text file transfer
+    ✓ Relative file path
+    ✓ Full file path
+    ✓ File comparison
+    ✓ Missing file handling
+    ✓ Unsupported file type handling
+    ✓ Oversized file handling
+    ✓ Encryption/decryption
+    ✓ Multiple-client communication
 
-2. Encryption is hop-by-hop rather than true end-to-end encryption.
 
-3. The server temporarily has access to plaintext while routing messages.
+# Known Limitations
+
+1. Repeating-Key XOR is not suitable for real-world secure communication.
+
+2. The encryption is hop-by-hop rather than true end-to-end encryption.
+
+3. The server temporarily has access to plaintext messages.
 
 4. Only `.txt` files are supported.
 
-5. File transfers are limited to the configured maximum file size.
+5. File transfers have a maximum size limit.
 
-6. File contents are held in memory during transfer rather than using
-   chunked/streaming transfer.
+6. File contents are held in memory during transfer.
 
-7. The application is intended as an educational demonstration of
-   socket programming, concurrency, protocol design, and symmetric
-   encryption.
+7. The application is designed primarily for Windows.
 
----
+8. The final multi-computer demonstration requires the computers to be reachable over the same network.
+
+9. GitHub is used for source-code synchronization, but the chat application itself communicates directly using TCP sockets and does not require GitHub during execution.
+
 
 # Dependencies
-
-No external cryptographic libraries are required.
 
 The project uses:
 
 - C
 - MinGW GCC
-- Windows Winsock2 (`ws2_32`)
+- Visual Studio Code
+- Git
+- Windows Winsock2
 - TCP sockets
 
-Tailscale is only required when clients and the server are being tested
-across different networks.
+The following library is required during compilation:
 
----
+    ws2_32
+
+No external cryptography library is required.
+
+
+# Final Project Architecture
+
+The complete system consists of three main components:
+
+    client.c
+        |
+        | Uses encryption functions
+        v
+    crypto.c
+        |
+        v
+    Server
+        |
+        | Routes messages/files
+        v
+    Other Clients
+
+
+For three simultaneous users:
+
+                       +----------------+
+                       |     SERVER     |
+                       |   Port 8080    |
+                       +--------+-------+
+                                |
+              +-----------------+-----------------+
+              |                 |                 |
+              v                 v                 v
+        +-----------+     +-----------+     +-----------+
+        |   SUMO    |     |   MONK    |     |   ALICE   |
+        |  CLIENT   |     |  CLIENT   |     |  CLIENT   |
+        +-----------+     +-----------+     +-----------+
+
 
 # Summary
 
-The SecureChat application demonstrates:
+SecureChat is a multi-client TCP chat application written in C.
 
-- TCP client-server communication
+The project demonstrates:
+
+- TCP socket programming
+- Client-server architecture
 - Multiple simultaneous clients
+- Concurrent client handling
 - User registration
 - Username management
 - Symmetric-key encryption
@@ -1017,11 +1128,26 @@ The SecureChat application demonstrates:
 - Message routing
 - Text-file transfer
 - File validation
+- File size limitation
 - Error handling
-- Client disconnection handling
-- Network testing across different networks
-- Hop-by-hop encrypted communication
+- Client disconnection
+- Online user listing
+- GitHub-based team collaboration
+- Testing across multiple laptops on the same Wi-Fi network
 
-The system provides a practical demonstration of how an encrypted
-multi-client communication system can be designed and implemented using
-C and TCP sockets.
+For the final demonstration, one laptop runs the server and two or more other laptops run clients.
+
+All clients connect to the server using the server laptop's local IPv4 address and port 8080.
+
+Example:
+
+    Server:
+        .\server.exe 8080
+
+    Client 1:
+        .\client.exe 192.168.1.105 8080
+
+    Client 2:
+        .\client.exe 192.168.1.105 8080
+
+Once connected, multiple users can communicate simultaneously through the same server.
